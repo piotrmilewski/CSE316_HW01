@@ -23,6 +23,7 @@ class TodoListController {
         // THEN THE CONTROLS ON THE LIST SCREEN
         this.registerEventHandler(TodoGUIId.LIST_HEADING, TodoHTML.CLICK, this[TodoCallback.PROCESS_GO_HOME]);
         this.registerEventHandler(TodoGUIId.LIST_NAME_TEXTFIELD, TodoHTML.KEYUP, this[TodoCallback.PROCESS_CHANGE_NAME]);
+        this.registerEventHandler(TodoGUIId.LIST_TRASH, TodoHTML.CLICK, this[TodoCallback.PROCESS_DELETE_LIST]);
     }
 
     /**
@@ -86,6 +87,17 @@ class TodoListController {
      */
     processGoHome() {
         window.todo.model.goHome();
+    }
+
+    /**
+     * This function creates a dialog to verify if one wishes
+     * to delete a list. It will then process that request.
+     */
+    processDeleteList() {
+        //let listBeingDeleted = window.todo.model.listToEdit;
+        //window.todo.model.removeList(listBeingDeleted);
+        window.todo.view.showDialog();
+        //window.todo.model.goHome();
     }
 
     /**

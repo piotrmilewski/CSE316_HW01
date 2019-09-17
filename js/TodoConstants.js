@@ -62,6 +62,10 @@ const TodoGUIId = {
     LIST_OWNER_PROMPT: "list_owner_prompt",
     LIST_OWNER_TEXTFIELD: 'list_owner_textfield',
     LIST_ITEMS_CONTAINER: 'list_items_container',
+
+    // ID FOR DIALONG
+    MODAL_CONTAINER: 'modal_container',
+    MODAL_YES_NO_DIALOG: 'modal_yes_no_dialog',
 };
 
 /**
@@ -83,6 +87,9 @@ const TodoGUIClass = {
     LIST_ITEM_CARD_ASSIGNED_TO: "list_item_card_assigned_to",
     LIST_ITEM_CARD_COMPLETED: "list_item_card_completed",
     LIST_ITEM_CARD_NOT_COMPLETED: "list_item_card_not_completed",
+
+    //DIALOG SCREEN CLASSes
+    IS_VISIBLE: "is_visible",
 };
 
 /**

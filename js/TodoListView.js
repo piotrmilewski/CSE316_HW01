@@ -155,6 +155,8 @@ class TodoListView {
     loadListData(listToLoad) {
         let listNameTextField = document.getElementById(TodoGUIId.LIST_NAME_TEXTFIELD);
         listNameTextField.value = listToLoad.getName();
+        let listOwnerTextField = document.getElementById(TodoGUIId.LIST_OWNER_TEXTFIELD);
+        listOwnerTextField.value = listToLoad.getOwner();
         this.loadItems(listToLoad);
     }
 
@@ -266,7 +268,9 @@ class TodoListView {
      */
     hideDialog() {
         let dialog = document.getElementById(TodoGUIId.MODAL_YES_NO_DIALOG);
+        let container = document.getElementById(TodoGUIId.MODAL_CONTAINER);
         dialog.classList.remove(TodoGUIClass.IS_VISIBLE);
+        container.classList.remove(TodoGUIClass.IS_VISIBLE);
     }
 
     /**
@@ -274,7 +278,9 @@ class TodoListView {
      */
     showDialog() {
         let dialog = document.getElementById(TodoGUIId.MODAL_YES_NO_DIALOG);
+        let container = document.getElementById(TodoGUIId.MODAL_CONTAINER);
         dialog.classList.add(TodoGUIClass.IS_VISIBLE);
+        container.classList.add(TodoGUIClass.IS_VISIBLE);
     }
 
     /**

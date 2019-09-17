@@ -78,9 +78,20 @@ body {
     font-size: 14pt;
 }
 #list_details_owner_container {}
+#list_trash {
+    font-size: 40px;
+}
 #list_trash:hover {
     color: var(--swatch-accent);
     cursor: pointer;
+}
+#modal_container {
+    background-color: rgba(0,0,0,0.0);
+    visibility: hidden;
+}
+#modal_yes_no_dialog {
+    background-color: var(--swatch-foundation);
+    visibility: hidden;
 }
 
 /* LIST SCREEN CLASSES */
@@ -124,4 +135,7 @@ body {
 }
 .list_item_card_not_completed {
     color: red;
+}
+.is_visible {
+    visibility: visible !important;
 }

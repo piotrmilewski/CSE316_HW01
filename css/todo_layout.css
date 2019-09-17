@@ -46,10 +46,10 @@ body {
 #list_heading {}
 #list_trash {
     position: absolute;
-    left: 85%;
-    width: 15%;
+    left: 92%;
+    width: 5%;
     text-align: right;
-    top: 5%;
+    top: 10%;
 }
 #list_details_container {
     padding-left: 2%;
@@ -66,6 +66,19 @@ body {
 #list_owner_prompt {}
 #list_owner_textfield {}
 #list_items_container {}
+#modal_container {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    height: 100%;
+    width: 100%;
+}
+#modal_yes_no_dialog {
+    position: absolute;
+    left: 30%;
+    top: 50%;
+    text-align: center;
+}
 
 /* LIST SCREEN CLASSES */
 .list_item_card, .list_item_add_card, .list_item_header_card {
