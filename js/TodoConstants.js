@@ -24,6 +24,7 @@ const TodoHTML = {
     CLASS: "class",
     CLICK: "click",
     DIV: "div",
+    BUTTON: "button",
     ID: "id",
     KEYUP: "keyup",
     ONCLICK: "onclick",
@@ -41,6 +42,7 @@ const TodoGUIId = {
     // IDs FOR SCREENS
     TODO_HOME: 'todo_home',
     TODO_LIST: 'todo_list',
+    TODO_ITEM: 'todo_item',
 
     // IDs FOR HOME SCREEN CONTROLS
     HOME_YOUR_LISTS_CONTAINER: 'home_your_lists_container',
@@ -62,10 +64,27 @@ const TodoGUIId = {
     LIST_OWNER_PROMPT: "list_owner_prompt",
     LIST_OWNER_TEXTFIELD: 'list_owner_textfield',
     LIST_ITEMS_CONTAINER: 'list_items_container',
+    ITEM_CARD_: "item_card_",
 
     // ID FOR DIALONG
     MODAL_CONTAINER: 'modal_container',
     MODAL_YES_NO_DIALOG: 'modal_yes_no_dialog',
+    MODAL_YES_BUTTON: 'modal_yes_button',
+    MODAL_NO_BUTTON: 'modal_no_button',
+
+    // ID FOR ITEM SCREEN
+    ITEM_DIALOG: 'item_dialog',
+    ITEM_DESCRIPTION: 'item_description',
+    ITEM_ASSIGNED_TO: 'item_assigned_to',
+    ITEM_DUE_DATE: 'item_due_date',
+    ITEM_COMPLETED: 'item_completed',
+    ITEM_BUTTON_CONTAINER: 'item_button_container',
+    ITEM_SUBMIT_BUTTON: 'item_submit_button',
+    ITEM_CANCEL_BUTTON: 'item_cancel_button',
+    ITEM_DESCRIPTION_TEXTFIELD: 'item_description_textfield',
+    ITEM_ASSIGNED_TO_TEXTFIELD: 'item_assigned_to_textfield',
+    ITEM_DUE_DATE_TEXTFIELD: 'item_due_date_textfield',
+    ITEM_COMPLETED_CHECKBOX: 'item_completed_checkbox',
 };
 
 /**
@@ -74,6 +93,8 @@ const TodoGUIId = {
  * size, locate, and stylize our user interface controls.
  */
 const TodoGUIClass = {
+    DISPLAY_OFF: 'display_off',
+
     // HOME SCREEN CLASSes
     HOME_LIST_LINK: "home_list_link",
 
@@ -82,14 +103,25 @@ const TodoGUIClass = {
     LIST_ITEM_ADD_CARD: "list_item_add_card",
     LIST_ITEM_HEADER_CARD: "list_item_header_card",
     LIST_ITEM_TASK_HEADER: "list_item_task_header",
+    LIST_ITEM_DUE_DATE_HEADER: "list_item_due_date_header",
     LIST_ITEM_STATUS_HEADER: "list_item_status_header",
     LIST_ITEM_CARD_DESCRIPTION: "list_item_card_description",
     LIST_ITEM_CARD_ASSIGNED_TO: "list_item_card_assigned_to",
+    LIST_ITEM_CARD_DUE_DATE: "list_item_card_due_date",
     LIST_ITEM_CARD_COMPLETED: "list_item_card_completed",
     LIST_ITEM_CARD_NOT_COMPLETED: "list_item_card_not_completed",
+    LIST_ITEM_CARD_TOOLBAR: "list_item_card_toolbar",
+    LIST_ITEM_CARD_BUTTON: "list_item_card_button",
+    DISABLED: "list_item_card_button_disabled",
+
+    // ITEM SCREEN CLASSes
+    TEXT_TOOLBAR: "text_toolbar",
+    ITEM_BUTTON: "item_button",
 
     //DIALOG SCREEN CLASSes
     IS_VISIBLE: "is_visible",
+    IS_SLIDE: "is_slide",
+    IS_SLIDE_OUT: "is_slide_out",
 };
 
 /**

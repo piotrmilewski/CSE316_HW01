@@ -62,6 +62,10 @@ class TodoListView {
         assignedToDiv.innerHTML =
             'Assigned To: ' + this.buildOpenTag(TodoHTML.STRONG) + listItem.getAssignedTo() + this.buildCloseTag(TodoHTML.STRONG);
 
+        let dueDateDiv = document.createElement(TodoHTML.DIV);
+        dueDateDiv.setAttribute(TodoHTML.CLASS, TodoGUIClass.LIST_ITEM_CARD_DUE_DATE);
+        dueDateDiv.innerHTML = listItem.getDueDate();
+
         let completedDiv = document.createElement(TodoHTML.DIV);
         if (listItem.isCompleted()) {
             completedDiv.innerHTML += "Completed";
@@ -72,10 +76,42 @@ class TodoListView {
             completedDiv.setAttribute(TodoHTML.CLASS, TodoGUIClass.LIST_ITEM_CARD_NOT_COMPLETED);
         }
 
+        let buttonsDiv = document.createElement(TodoHTML.DIV);
+        buttonsDiv.setAttribute(TodoHTML.CLASS, TodoGUIClass.LIST_ITEM_CARD_TOOLBAR);
+        
+        let buttonUp = document.createElement(TodoHTML.BUTTON);
+        buttonUp.setAttribute(TodoHTML.CLASS, TodoGUIClass.LIST_ITEM_CARD_BUTTON);
+        buttonUp.innerHTML = this.buildOpenTag(TodoHTML.STRONG) + "&#8679" + this.buildCloseTag(TodoHTML.STRONG);
+        this.setupCallback(buttonUp, TodoHTML.ONCLICK, TodoCallback.PROCESS_MOVE_ITEM_UP, itemArgs);
+        if (itemArgs[0] == 0){
+            buttonUp.classList.add(TodoGUIClass.DISABLED);
+            buttonUp.disabled = true;
+        }
+
+        let buttonDown = document.createElement(TodoHTML.BUTTON);
+        buttonDown.setAttribute(TodoHTML.CLASS, TodoGUIClass.LIST_ITEM_CARD_BUTTON);
+        buttonDown.innerHTML = this.buildOpenTag(TodoHTML.STRONG) + "&#8681" + this.buildCloseTag(TodoHTML.STRONG);
+        this.setupCallback(buttonDown, TodoHTML.ONCLICK, TodoCallback.PROCESS_MOVE_ITEM_DOWN, itemArgs);
+        if (itemArgs[0] == window.todo.model.listToEdit.getLength()-1){
+            buttonDown.classList.add(TodoGUIClass.DISABLED);
+            buttonDown.disabled = true;
+        }
+
+        let buttonRemove = document.createElement(TodoHTML.BUTTON);
+        buttonRemove.setAttribute(TodoHTML.CLASS, TodoGUIClass.LIST_ITEM_CARD_BUTTON);
+        buttonRemove.innerHTML = this.buildOpenTag(TodoHTML.STRONG) + "&#10005" + this.buildCloseTag(TodoHTML.STRONG);
+        this.setupCallback(buttonRemove, TodoHTML.ONCLICK, TodoCallback.PROCESS_DELETE_ITEM, itemArgs);
+
+        buttonsDiv.appendChild(buttonUp);
+        buttonsDiv.appendChild(buttonDown);
+        buttonsDiv.appendChild(buttonRemove);
+
         // THESE THREE SPANS GO IN THE DETAILS DIV
         newItemDiv.appendChild(descriptionDiv);
         newItemDiv.appendChild(assignedToDiv);
+        newItemDiv.appendChild(dueDateDiv);
         newItemDiv.appendChild(completedDiv);
+        newItemDiv.appendChild(buttonsDiv);
 
         return newItemDiv;
     }
@@ -96,6 +132,11 @@ class TodoListView {
         let callbackArguments = [];
         this.setupCallback(taskHeaderDiv, TodoHTML.ONCLICK, TodoCallback.PROCESS_SORT_ITEMS_BY_TASK, callbackArguments);
 
+        let dueDateHeaderDiv = document.createElement(TodoHTML.DIV);
+        dueDateHeaderDiv.setAttribute(TodoHTML.CLASS, TodoGUIClass.LIST_ITEM_DUE_DATE_HEADER);
+        dueDateHeaderDiv.innerHTML = 'Due Date';
+        this.setupCallback(dueDateHeaderDiv, TodoHTML.ONCLICK, TodoCallback.PROCESS_SORT_ITEMS_BY_DUE_DATE, callbackArguments);
+
         let statusHeaderDiv = document.createElement(TodoHTML.DIV);
         statusHeaderDiv.setAttribute(TodoHTML.CLASS, TodoGUIClass.LIST_ITEM_STATUS_HEADER);
         statusHeaderDiv.innerHTML = 'Status';
@@ -103,6 +144,7 @@ class TodoListView {
 
         // THESE GO IN THE DETAILS DIV
         listItemHeaderDiv.appendChild(taskHeaderDiv);
+        listItemHeaderDiv.appendChild(dueDateHeaderDiv);
         listItemHeaderDiv.appendChild(statusHeaderDiv);
         return listItemHeaderDiv;
     }
@@ -144,6 +186,14 @@ class TodoListView {
             let itemCard = this.buildListItem(item, i);
             listItemsDiv.appendChild(itemCard);
         }
+
+        let newListButton = document.createElement(TodoHTML.DIV);
+        newListButton.setAttribute(TodoHTML.CLASS, TodoGUIClass.LIST_ITEM_ADD_CARD);
+        newListButton.innerHTML = "+";
+        let itemArgs = [];
+        this.setupCallback(newListButton, TodoHTML.ONCLICK, TodoCallback.PROCESS_CREATE_NEW_ITEM, itemArgs);
+
+        listItemsDiv.appendChild(newListButton);
     }
 
     /**
@@ -269,8 +319,12 @@ class TodoListView {
     hideDialog() {
         let dialog = document.getElementById(TodoGUIId.MODAL_YES_NO_DIALOG);
         let container = document.getElementById(TodoGUIId.MODAL_CONTAINER);
-        dialog.classList.remove(TodoGUIClass.IS_VISIBLE);
-        container.classList.remove(TodoGUIClass.IS_VISIBLE);
+        dialog.classList.remove(TodoGUIClass.IS_SLIDE);
+        dialog.classList.add(TodoGUIClass.IS_SLIDE_OUT);
+        setTimeout(function(){ 
+            dialog.classList.remove(TodoGUIClass.IS_SLIDE_OUT);
+            container.classList.remove(TodoGUIClass.IS_VISIBLE); 
+        }, 2000);
     }
 
     /**
@@ -279,7 +333,7 @@ class TodoListView {
     showDialog() {
         let dialog = document.getElementById(TodoGUIId.MODAL_YES_NO_DIALOG);
         let container = document.getElementById(TodoGUIId.MODAL_CONTAINER);
-        dialog.classList.add(TodoGUIClass.IS_VISIBLE);
+        dialog.classList.add(TodoGUIClass.IS_SLIDE);
         container.classList.add(TodoGUIClass.IS_VISIBLE);
     }
 

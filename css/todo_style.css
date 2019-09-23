@@ -21,15 +21,14 @@ body {
 #todo_home, #todo_list, #todo_item {
     background-color: var(--swatch-primary);
 }
-#todo_list {}
 
 /* HOME SCREEN CONTROLS */
-#home_your_lists_container {}
+/*#home_your_lists_container {}*/
 #home_your_lists_heading {
     font-size: 24pt;
     font-weight: bold;
 }
-#home_your_lists_list {}
+/*#home_your_lists_list {}*/
 #home_banner_container {
     background-image: linear-gradient(to bottom,         
     #b8b808, #636723);
@@ -43,8 +42,8 @@ body {
     padding-top: 5%;
     padding-bottom: 5%;
 }
-#home_banner_image {}
-#home_new_list_container {}
+/*#home_banner_image {}
+#home_new_list_container {}*/
 #home_new_list_button {
     font-size: 32pt;
 }
@@ -69,15 +68,15 @@ body {
 #list_heading:hover {
     color: var(--swatch-accent);
 }
-#list_details_container {}
-#list_details_name_container {}
+/*#list_details_container {}
+#list_details_name_container {}*/
 #list_name_prompt, #list_owner_prompt {
     font-size: 14pt;
 }
 #list_name_textfield, #list_owner_textfield {
     font-size: 14pt;
 }
-#list_details_owner_container {}
+/*#list_details_owner_container {}*/
 #list_trash {
     font-size: 40px;
 }
@@ -89,9 +88,20 @@ body {
     background-color: rgba(0,0,0,0.0);
     visibility: hidden;
 }
+
+/*#modal_button_container {}*/
 #modal_yes_no_dialog {
-    background-color: var(--swatch-foundation);
-    visibility: hidden;
+    background-color: var(--swatch-complement);
+}
+#modal_yes_button:hover {
+    box-shadow: 1px 2px;
+}
+#modal_no_button:hover {
+    box-shadow: 1px 2px;
+}
+
+#item_description_textfield, #item_assigned_to_textfield, #item_due_date_textfield, #item_completed_textfield {
+    font-size: 14pt;
 }
 
 /* LIST SCREEN CLASSES */
@@ -118,8 +128,8 @@ body {
 .list_item_task_header:hover, .list_item_due_date_header:hover, .list_item_status_header:hover {
     color: var(--swatch-primary);
 }
-.list_item_task_header {}
-.list_item_status_header {}
+/*.list_item_task_header {}
+.list_item_status_header {}*/
 .list_item_card_description {
     font-weight: bold;
     font-size: 14pt;
@@ -129,13 +139,46 @@ body {
     font-weight: normal;
     font-size: 12pt;
 }
-.list_item_card_assigned_to {}
+/*.list_item_card_assigned_to {}*/
 .list_item_card_completed {
     color: green;
 }
 .list_item_card_not_completed {
     color: red;
 }
+.list_item_card_button {
+    background-color: var(--swatch-accent);
+    font-size: 24pt;
+}
+.list_item_card_button_disabled {
+    background-color: rgb(202, 202, 202) !important;
+}
 .is_visible {
     visibility: visible !important;
+}
+.is_slide {
+    animation-name: slide;
+    animation-duration: 2s;
+}
+.is_slide_out {
+    animation-name: slide_out;
+    animation-duration: 2s;
+}
+
+@keyframes slide_out {
+    from {left: 30%;}
+    to {left: 120%;}
+}
+
+@keyframes slide {
+    from {left: -60%;}
+    to {left: 30%;}
+}
+
+/* item screen classes */
+.text_toolbar {
+    font-size: 14pt;
+}
+.item_button {
+    font-size: 14pt;
 }

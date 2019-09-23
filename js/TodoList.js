@@ -14,6 +14,8 @@ class TodoList {
     constructor() {
         this.name = "Unnknown";
         this.owner = "Unknown";
+        this.index = 0;
+        this.newItem = false;
         this.items = new Array();
     }   
     
@@ -35,6 +37,26 @@ class TodoList {
         return this.owner;
     }
 
+    getLength() {
+        return this.items.length;
+    }
+    
+    getIndex() {
+        return this.index;
+    }
+
+    setIndex(newIndex) {
+        this.index = newIndex;
+    }
+
+    getNewItem() {
+        return this.newItem;
+    }
+
+    setNewItem(newBool) {
+        this.newItem = newBool;
+    }
+
     /**
      * Adds an item to the end of the list.
      * 
@@ -49,9 +71,20 @@ class TodoList {
      * 
      * @param {TodoListItem} itemToRemove Item to remove from the list.
      */
-    removeItem(itemToRemove) {
-        let indexOfItem = this.items.indexOf(itemToRemove);
+    removeItem(indexOfItem) {
         this.items.splice(indexOfItem, 1);
+    }
+
+    moveItemUp(indexOfItem) {
+        if (indexOfItem != 0){
+            this.items.splice(indexOfItem-1, 0, this.items.splice(indexOfItem, 1)[0]);
+        }
+    }
+
+    moveItemDown(indexOfItem) {
+        if (indexOfItem != this.items.length-1){
+            this.items.splice(indexOfItem+1, 0, this.items.splice(indexOfItem, 1)[0]);
+        }
     }
 
     /**

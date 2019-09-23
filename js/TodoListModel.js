@@ -117,8 +117,12 @@ class TodoListModel {
      * This function will navigate the user to the home (i.e. welcome) screen.
      */
     goHome() {
+        let home = document.getElementById(TodoGUIId.TODO_HOME);
+        home.classList.remove(TodoGUIClass.DISPLAY_OFF);
+
         // THIS COULD HAPPEN ANYWHERE SO HIDE ALL THE OTHERS
         this.view.showElementWithId(TodoGUIId.TODO_LIST, false);
+        this.view.showElementWithId(TodoGUIId.TODO_ITEM, false);
 
         // AND GO HOME
         this.view.showElementWithId(TodoGUIId.TODO_HOME, true);        
@@ -129,11 +133,48 @@ class TodoListModel {
      * may edit a list.
      */
     goList() {
+        let home = document.getElementById(TodoGUIId.TODO_HOME);
+        home.classList.add(TodoGUIClass.DISPLAY_OFF);
+
         // THIS MIGHT HAVE OCCURED FROM HOME SO HIDE HOME
         this.view.showElementWithId(TodoGUIId.TODO_HOME, false);
+        this.view.showElementWithId(TodoGUIId.TODO_ITEM, false);
 
         // SHOW THE TOOLBAR AND LIST EDIT
         this.view.showElementWithId(TodoGUIId.TODO_LIST, true);
+    }
+
+    goItem() {
+        let home = document.getElementById(TodoGUIId.TODO_HOME);
+        home.classList.add(TodoGUIClass.DISPLAY_OFF);
+
+        // THIS MIGHT HAVE OCCURED FROM HOME SO HIDE HOME
+        this.view.showElementWithId(TodoGUIId.TODO_HOME, false);
+        this.view.showElementWithId(TodoGUIId.TODO_LIST, false);
+
+        // SHOW THE TOOLBAR AND LIST EDIT
+        this.view.showElementWithId(TodoGUIId.TODO_ITEM, true);
+    }
+
+    newListItem(listBeingEdited, newDescription, newAssignedTo, newDueDate, newCompleted) {
+        let todoListItem = new TodoListItem();
+
+        todoListItem.setDescription(newDescription);
+        todoListItem.setAssignedTo(newAssignedTo);
+        todoListItem.setDueDate(newDueDate);
+        todoListItem.setCompleted(newCompleted);
+
+        listBeingEdited.addItem(todoListItem);
+    }
+
+    editListItem(listBeingEdited, newDescription, newAssignedTo, newDueDate, newCompleted) {
+        let index = listBeingEdited.getIndex();
+        let todoListItem = listBeingEdited.getItemAtIndex(index);
+
+        todoListItem.setDescription(newDescription);
+        todoListItem.setAssignedTo(newAssignedTo);
+        todoListItem.setDueDate(newDueDate);
+        todoListItem.setCompleted(newCompleted);
     }
 
     /**
@@ -147,6 +188,13 @@ class TodoListModel {
         // THE LIST OF LIST LINKS IF IT'S CHANGED
         if (listBeingEdited.getName() != newName) {
             listBeingEdited.setName(newName);
+            this.view.loadListLinks(this.todoLists);
+        }
+    }
+
+    updateListOwner(listBeingEdited, newOwner) {
+        if (listBeingEdited.getOwner() != newOwner) {
+            listBeingEdited.setOwner(newOwner);
             this.view.loadListLinks(this.todoLists);
         }
     }
@@ -215,6 +263,7 @@ class TodoListModel {
 
         // IF IT'S A DECREASING CRITERIA SWAP THE ITEMS
         if (thisModel.isCurrentItemSortCriteria(ItemSortCriteria.SORT_BY_TASK_DECREASING)
+            || thisModel.isCurrentItemSortCriteria(ItemSortCriteria.SORT_BY_DUE_DATE_DECREASING)
             || thisModel.isCurrentItemSortCriteria(ItemSortCriteria.SORT_BY_STATUS_DECREASING)) {
             let temp = item1;
             item1 = item2;
@@ -226,6 +275,16 @@ class TodoListModel {
             if (item1.getDescription() < item2.getDescription())
                 return -1;
             else if (item1.getDescription() > item2.getDescription())
+                return 1;
+            else
+                return 0;
+        }
+        // SORT BY DUE DATE
+        else if (thisModel.isCurrentItemSortCriteria(ItemSortCriteria.SORT_BY_DUE_DATE_INCREASING)
+            || thisModel.isCurrentItemSortCriteria(ItemSortCriteria.SORT_BY_DUE_DATE_DECREASING)) {
+            if (item1.getDueDate() < item2.getDueDate())
+                return -1;
+            else if (item1.getDueDate() > item2.getDueDate())
                 return 1;
             else
                 return 0;

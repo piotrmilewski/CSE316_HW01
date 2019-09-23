@@ -14,6 +14,7 @@ class TodoListItem {
     constructor() {
         this.description = "Unknown";
         this.assignedTo = "Unknown";
+        this.dueDate = "Unknown";
         this.completed = false;
     }
 
@@ -33,6 +34,14 @@ class TodoListItem {
 
     setAssignedTo(initAssignedTo) {
         this.assignedTo = initAssignedTo;
+    }
+
+    getDueDate() {
+        return this.dueDate;
+    }
+
+    setDueDate(initDueDate) {
+        this.dueDate = initDueDate;
     }
 
     isCompleted() {
